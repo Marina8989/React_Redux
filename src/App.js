@@ -1,12 +1,12 @@
 import {connect} from 'react-redux';
-import {incrementCounter} from './store';
-
+import {incrementCounter, decrementCounter} from './store/counter/actions';
 
 function App(props) {
     return(
         <div>
-            <h2 onClick={props.increment}>{props.counter}</h2>
-            <h2>Start editing...</h2>
+            <h2>{props.counter}</h2>
+            <button onClick={props.increment}>Increment</button>
+            <button onClick={props.decrement}>decrement</button>
         </div>
     )
 } 
@@ -16,7 +16,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-    increment: incrementCounter
+    increment: incrementCounter,
+    decrement: decrementCounter
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
