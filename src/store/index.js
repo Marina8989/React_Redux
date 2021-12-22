@@ -1,8 +1,8 @@
 import {combineReducers, createStore} from 'redux';
-import counterReducer from './counter';
+import todos from './todos';
 
 const reducers = combineReducers({
-    counter: counterReducer
+    todos
 })
 
 export const store = createStore(reducers)

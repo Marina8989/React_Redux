@@ -1,28 +1,30 @@
 import { useState } from 'react';
 import {connect} from 'react-redux';
-import {incrementCounter, decrementCounter, userNumberCounter} from './store/counter/actions';
+import {addTodo} from './store/todos/actions';
 
 function App(props) {
-    const [value, setValue] = useState('')
+    const [value, setValue] = useState('');
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      props.addTodo(value);
+      setValue('');
+    }
     return(
         <div>
-            <input value={value} onChange={(e) => setValue(e.target.value)} />
-            <h2>{props.counter}</h2>
-            <button onClick={props.increment}>Increment</button>
-            <button onClick={props.decrement}>decrement</button>
-            <button onClick={() => props.userNumberCounter(value)}>Add a number</button>
+        <form onSubmit={handleSubmit}>
+           <input value={value} onChange={(e) => setValue(e.target.value)} />
+        </form>    
+            {props.todos.map(todo => <div key={todo}>{todo}</div>)}
         </div>
     )
 } 
 
 const mapStateToProps = (state) => ({
-    counter: state.counter
+    todos: state.todos.data
 })
 
 const mapDispatchToProps = {
-    increment: incrementCounter,
-    decrement: decrementCounter,
-    userNumberCounter
+   addTodo
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
