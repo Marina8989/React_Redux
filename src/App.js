@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {connect} from 'react-redux';
-import {addTodo} from './store/todos/actions';
+import {addTodo, removeTodo} from './store/todos/actions';
 
 function App(props){
     const [value, setValue] = useState('');
@@ -16,7 +16,7 @@ function App(props){
            <form onSubmit={handleSubmit}>
                <input value={value} onChange={(e) => setValue(e.target.value)}/>
            </form>
-           {props.todos.map(todo => <div key={todo}>{todo}</div>)}
+           {props.todos.map(todo => <div key={todo} onClick={() => props.removeTodo(todo)}>{todo}</div>)}
        </div>
    )
 }
@@ -26,7 +26,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-    addTodo
+    addTodo,
+    removeTodo
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
