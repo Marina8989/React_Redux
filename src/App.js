@@ -2,19 +2,19 @@ import { useState } from 'react';
 import {connect} from 'react-redux';
 import {addTodo, removeTodo} from './store/todos/actions';
 
+
 function App(props){
     const [value, setValue] = useState('');
 
     const handleSubmit = (e) => {
        e.preventDefault();
-       props.addTodo(value);
-       setValue('')
+       props.addTodo(value)
+       setValue('');
     }
-
-   return (
+   return(
        <div>
            <form onSubmit={handleSubmit}>
-               <input value={value} onChange={(e) => setValue(e.target.value)}/>
+             <input value={value} onChange={(e) => setValue(e.target.value)} />
            </form>
            {props.todos.map(todo => <div key={todo} onClick={() => props.removeTodo(todo)}>{todo}</div>)}
        </div>
@@ -22,7 +22,7 @@ function App(props){
 }
 
 const mapStateToProps = (state) => ({
-     todos: state.todos.data
+    todos: state.todos.data
 })
 
 const mapDispatchToProps = {
