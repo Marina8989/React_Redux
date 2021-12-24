@@ -1,8 +1,9 @@
-import {combineReducers, createStore} from 'redux';
-import todos from './todos';
+import {combineReducers, createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
+import users from './users';
 
 const reducers = combineReducers({
-    todos
+    users
 })
 
-export const store = createStore(reducers)
+export const store = createStore(reducers, applyMiddleware(thunk))
