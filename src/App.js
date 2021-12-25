@@ -1,36 +1,35 @@
 import {useEffect} from 'react';
 import {connect} from 'react-redux';
-import {getData, removeUser} from './store/users/actions';
+import {getData, remove} from './store/users/actions';
 
 function App(props){
     useEffect(() => {
        props.getData();
     }, [])
-   return(
-       <div style={{display: 'flex'}}>
-          {props.isLoading && <h3>Loading...</h3>}
-          <div>
-            <ul>
-           {props.users.map(user => <li key={user.name} onClick={() => props.removeUser(user)}>{user.name}</li>)}
-            </ul>
-            <ul>
-                {props.deletedUsers.map(user => <li key={user.name}>{user.name}</li>)}
-            </ul>
-          </div>
+
+   return (
+       <div>
+         {props.isLoading && <h3>Loading...</h3>}
+          <ul>
+            {props.users.map(user => <li key={user.id} onClick={() => props.remove(user)}>{user.name}</li>)} 
+          </ul>
+          <ul>
+              {props.deletedUsers.map(user => <li key={user.id}>{user.name}</li>)}
+          </ul>
        </div>
    )
 }
 
 const mapStateToProps = (state) => ({
-    users: state.users.data,
-    isLoading: state.users.isLoading,
-    isError: state.users.isError,
-    deletedUsers: state.deletedUsers.data
+   users: state.users.data,
+   isLaoding: state.users.isLoading,
+   isError: state.users.isError,
+   deletedUsers: state.deletedUsers.data
 })
 
 const mapDispatchToProps = {
     getData,
-    removeUser
+    remove
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
