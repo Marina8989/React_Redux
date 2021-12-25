@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {addDeletedUser} from '../deletedUsers/actions';
 import {PENDING, SUCCESS, ERROR, REMOVE} from './index';
 
 export const getData = () => async (dispatch, getState) => {
@@ -21,10 +22,9 @@ export const getData = () => async (dispatch, getState) => {
 }
 
 export const remove = (user) => (dispatch, getState) => {
-//    const state = getState();
-//    const newState = state.users.data.filter(el => el.id !== user.id);
    dispatch({
        type: REMOVE,
        payload: user
-   })
+   });
+   dispatch(addDeletedUser(user))
 }
