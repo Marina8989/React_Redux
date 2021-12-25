@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_USERS_SUCCESS, GET_USERS_ERROR, GET_USERS_PENDING} from './index';
+import {GET_USERS_SUCCESS, GET_USERS_ERROR, GET_USERS_PENDING, REMOVE_USER} from './index';
 
 export const getData = () => async (dispatch, getState) => {
     try{
@@ -17,4 +17,13 @@ export const getData = () => async (dispatch, getState) => {
          payload: err
       })
     }
+}
+
+export const removeUser = (user) => (dispatch, getState) => {
+   const state = getState();
+   const nextUsers = state.users.data.filter(el => el.id !== user.id);
+   dispatch({
+      type: REMOVE_USER,
+      payload: nextUsers
+   })
 }
