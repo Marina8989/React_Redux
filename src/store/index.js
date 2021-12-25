@@ -1,8 +1,11 @@
 import {combineReducers, createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import users from './users';
+import deletedUsers from './deletedUsers';
+
 
 const reducers = combineReducers({
-    users
+    users,
+    deletedUsers
 })
 export const store = createStore(reducers, applyMiddleware(thunk))
