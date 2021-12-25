@@ -5,5 +5,4 @@ import users from './users';
 const reducers = combineReducers({
     users
 })
-
 export const store = createStore(reducers, applyMiddleware(thunk))

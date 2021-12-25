@@ -3,34 +3,34 @@ const initialState = {
     isLoading: false,
     isError: false
 };
-
-export const GET_USERS_PENDING = "GET_USERS_PENDING";
-export const GOT_USERS_SUCCESS = "GOT_USERS_SUCCESS";
+export const GET_USERS_SUCCESS = "GET_USERS_SUCCESS";
 export const GET_USERS_ERROR = "GET_USERS_ERROR";
+export const GET_USERS_PENDING = "GET_USERS_PENDING";
 
 
-function usersReducer(state=initialState , action) {
+function usersReducer(state=initialState, action){
     switch(action.type){
         case GET_USERS_PENDING:
             return {
                 ...state,
-                isError: false,
-                isLoading: true
+                isLoading: true,
+                isError: false
             }
-        case GOT_USERS_SUCCESS:
-          return {
-               ...state,
-               data: action.payload,
-               isLoading: false,
-               isError: false
-            }    
+        case GET_USERS_SUCCESS:
+            return {
+                ...state,
+                data: action.payload,
+                isLoading: false
+            }
         case GET_USERS_ERROR:
             return {
                 ...state,
                 isError: true,
-            }    
-        default:  
-          return state;
+                isLoading: false
+            }      
+        default:
+            return state;
     }
 }
+
 export default usersReducer;
