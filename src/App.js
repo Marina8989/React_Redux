@@ -1,17 +1,19 @@
+import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {decrease, increase, increseBy33} from './redux/counter';
+import {getUser} from './features/users/usersSlice';
 
 function App(){
-    const {count} = useSelector((state) => state.count);
-    const dispatch = useDispatch();
-    console.log(count)
-    return (
-       <div>
-           <h2>Counter {count}</h2>
-           <button onClick={() => {dispatch(decrease())}}>Decrease</button>
-           <button onClick={() => {dispatch(increase())}}>Increase</button>
-           <button onClick={() => {dispatch(increseBy33(33))}}>By 33</button>
-       </div>
+   const {users} = useSelector(state => state.users);
+   const dispatch = useDispatch();
+
+   useEffect(() => {
+      dispatch(getUser())
+   }, [dispatch])
+    return(
+        <div>
+            <h2>Users Display List</h2>
+            {users && users.map(user => <h2 key={user.id}>{user.name}</h2>)}
+        </div>
     )
 }
 
