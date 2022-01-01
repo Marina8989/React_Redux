@@ -1,18 +1,10 @@
-import React, {useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {getUser} from './features/users/usersSlice';
+import { ToastContainer } from "react-toastify";
 
-function App(){
-   const {users} = useSelector(state => state.users);
-   const dispatch = useDispatch();
-
-   useEffect(() => {
-      dispatch(getUser())
-   }, [dispatch])
-    return(
+const App = () => {
+    return (
         <div>
-            <h2>Users Display List</h2>
-            {users && users.map(user => <h2 key={user.id}>{user.name}</h2>)}
+          <ToastContainer />
+          <h1>Welcome to React Redux Contact Book</h1>
         </div>
     )
 }
