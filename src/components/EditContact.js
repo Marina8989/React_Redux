@@ -1,9 +1,11 @@
 import React from "react";
+import { Link , useParams} from "react-router-dom";
 
-const AddContact = () => {
+const EditContact = () => {
+    const {id} = useParams()
   return (
     <div className="container">
-      <h1 className="display-3 my-5 text-center">Add Student</h1>
+      <h1 className="display-3 my-5 text-center">Edit Student {id}</h1>
       <div className="row">
         <div className="col-md-6 shadow mx-auto p-5">
           <form>
@@ -27,9 +29,10 @@ const AddContact = () => {
             <div className="form-group">
               <input
                 type="submit"
-                value="Add Student"
-                className="btn btn-block btn-dark"
+                value="Update Student"
+                className="btn btn-dark"
               />
+              <Link to="/" className="btn btn-danger ml-3">Cancel</Link>
             </div>
           </form>
         </div>
@@ -38,4 +41,4 @@ const AddContact = () => {
   );
 };
 
-export default AddContact;
+export default EditContact;
