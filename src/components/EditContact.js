@@ -19,13 +19,13 @@ const EditContact = () => {
      e.preventDefault();
 
     const checkEmail = contacts.find(
-      (contact) => contact.id !== id && contact.email === email
+      (contact) => contact.id !== parseInt(id) && contact.email === email && contact
     );
     const checkNumber = contacts.find(
-      (contact) => contact.id !== id && contact.number === parseInt(number)
+      (contact) => contact.id !== parseInt(id) && contact.number === parseInt(number) && contact
     );
     const checkName = contacts.find(
-      (contact) => contact.id !== id && contact.name === name
+      (contact) => contact.id !== parseInt(id) && contact.name === name && contact
     );
 
     if (!name || !email || !number) {
