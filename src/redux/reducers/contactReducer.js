@@ -16,9 +16,13 @@ const initialState = [
 
 const contactReducer = ( state = initialState, action) => {
    switch(action.type){
-       case "ADD_CONTACT":
+      case "ADD_CONTACT":
           return [...state, action.payload];
-        default:
+      case "UPDATE_CONTACT":
+         const updatedState = state.map(contact => contact.id === action.payload.id ? action.payload : contact);
+         state = updatedState;
+         return state;
+      default:
           return state;
    }
 }

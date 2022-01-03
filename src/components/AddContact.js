@@ -7,10 +7,9 @@ const AddContact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
+  
   const contacts = useSelector((state) => state);
   const dispatch = useDispatch();
-  console.log(contacts);
-
   const history = useHistory();
 
   const handleSubmit = (e) => {
