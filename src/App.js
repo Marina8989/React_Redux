@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { getData } from  "./store/users/actions"; 
+import { getData, removeUser } from  "./store/users/actions"; 
+//import { deletedUser } from "./store/deletedUsers/actions";
 
 function App(props){
   console.log(props.users)
@@ -11,7 +12,13 @@ function App(props){
       <div>
          <h3>List of Names</h3>
          {props.isLoading && <h3>Loading...</h3>}
-         {props.users.map(user => <div key={user.id}>{user.name}</div>)}
+          <div>
+           {props.users.map(user => <div key={user.id} onClick={() => props.removeUser(user)}>{user.name}</div>)}
+         </div>
+         <br />
+         <div>  
+           {props.deletedUsers.map(user => <div key={user.name}>{user.name}</div>)}
+          </div>
       </div>
   )
 }
@@ -19,10 +26,12 @@ function App(props){
 const mapStateToProps = (state) => ({
    users: state.users.data,
    isLoading: state.users.isLoading,
-   isError: state.users.isError
+   isError: state.users.isError,
+   deletedUsers: state.deletedUsers.data
 })
 const mapDispatchToProps = {
-  getData
+  getData,
+  removeUser
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

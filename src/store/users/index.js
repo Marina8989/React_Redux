@@ -6,6 +6,7 @@ const initialState = {
 export const USER_PENDING = "USER_PENDING";
 export const USER_SUCCESS = "USER_SUCCESS";
 export const USER_ERROR = "USER_ERROR";
+export const REMOVE_USER = "REMOVE_USER";
 
 const usersReducer = (state = initialState, action) => {
   switch(action.type){
@@ -25,7 +26,12 @@ const usersReducer = (state = initialState, action) => {
             ...state,
             isError: true,
             isLoading: false
-        }        
+        }   
+    case REMOVE_USER:
+        return {
+            ...state,
+            data: state.data.filter(el => el.id !== action.payload.id)
+        }         
     default:
       return state;
   }
