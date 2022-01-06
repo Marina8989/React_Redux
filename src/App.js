@@ -1,22 +1,28 @@
-import { ToastContainer } from "react-toastify";
-import { Switch, Route } from "react-router-dom";
-import Navbar from './components/Navbar';
-import Home from './components/Home';
-import AddContact from './components/AddContact';
-import EditContact from './components/EditContact';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { getData } from  "./store/users/actions"; 
 
-const App = () => {
-    return (
-        <div>
-          <ToastContainer />
-          <Navbar />
-          <Switch>
-              <Route exact path="/" component={() => <Home />} />
-              <Route path="/add" component={() => <AddContact />}/>
-              <Route path="/edit/:id" component={() => <EditContact />} />
-           </Switch>
-        </div>
-    )
+function App(props){
+  console.log(props.users)
+  useEffect(()=> {
+     props.getData();
+  }, [])
+  return(
+      <div>
+         <h3>List of Names</h3>
+         {props.isLoading && <h3>Loading...</h3>}
+         {props.users.map(user => <div key={user.id}>{user.name}</div>)}
+      </div>
+  )
 }
 
-export default App
+const mapStateToProps = (state) => ({
+   users: state.users.data,
+   isLoading: state.users.isLoading,
+   isError: state.users.isError
+})
+const mapDispatchToProps = {
+  getData
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

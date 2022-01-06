@@ -1,20 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from "react-router-dom";
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import { composeWithDevTools } from "redux-devtools-extension";
-import App from './App';
-import "bootstrap/dist/css/bootstrap.min.css";
-import "react-toastify/dist/ReactToastify.css";
-import contactReducer from "./redux/reducers/contactReducer";
-
-const store = createStore(contactReducer, composeWithDevTools());
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { store } from "./store";
+import App from "./App";
 
 ReactDOM.render(
 <Provider store={store}>
-  <Router>
-    <App />
-  </Router>
+  <App />
 </Provider>,
-document.getElementById('root'));
+document.getElementById("root"));
