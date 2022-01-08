@@ -12,13 +12,20 @@ const ShopItem = (props) => {
     console.log(props.shop)
     return (
         <div>
-           <Link to="/shop/id" >Shop Item Page....</Link>
+          {props.isLoading && <h3>Loading...</h3>}
+          {props.shop.map(item =>
+              <div key={item.id}>
+              <Link to={`/shop/${item.id}`}>{item.title}</Link> 
+              </div>
+          )}
         </div>
     )
 }
 
 const mapStateToProps = (state) => ({
-    shop: state.shop.data
+    shop: state.shop.data,
+    isLoading: state.shop.isLoading,
+    isError: state.shop.isError
 })
 
 const mapDispatchToProps = {
