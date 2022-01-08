@@ -14,9 +14,13 @@ const ShopItem = (props) => {
         <div>
           {props.isLoading && <h3>Loading...</h3>}
           {props.shop.map(item =>
-              <div key={item.id}>
-              <Link to={`/shop/${item.id}`}>{item.title}</Link> 
-              </div>
+             <>
+              <Link to={`/shop/${item.id}`} key={item.id}>
+               <h3>{item.title} - <span>${item.price}</span></h3>
+              </Link>
+              <img src={item.image} style={{width: "100px", height: "100px"}} />
+              <h5>{item.description}</h5>
+             </> 
           )}
         </div>
     )
