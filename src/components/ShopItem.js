@@ -1,8 +1,15 @@
-import React from "react";
- import { Link } from "react-router-dom";
+import React, {useEffect} from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { getData } from "../store/ShopStore/shopActions.js";
 
 
-const ShopItem = () => {
+const ShopItem = (props) => {
+   useEffect(() => {
+        props.getData();
+   }, [])
+
+    console.log(props.shop)
     return (
         <div>
            <Link to="/shop/id" >Shop Item Page....</Link>
@@ -10,4 +17,12 @@ const ShopItem = () => {
     )
 }
 
-export default ShopItem
+const mapStateToProps = (state) => ({
+    shop: state.shop.data
+})
+
+const mapDispatchToProps = {
+    getData
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShopItem);
